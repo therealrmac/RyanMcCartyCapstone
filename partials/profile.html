@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <h1>My Profile</h1>
+    </div>
+    <div class="col-md-1 text-right">
+        <a ng-href="#!/profile/edit"><span class="biggerPlease addPin glyphicon glyphicon-pencil"></span></a>
+    </div>
+    <div class="col-md-1">
+        <img class="userPhoto" src="{{photo}}">
+    </div>
+    <div class="col-md-1 text-right">
+        <a ng-href="#!/newBoard"><span class="biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new board"></span></a>
+    </div>
+</div>
+<div class="row col-sm-10 col-sm-offset-1 userBoards">
+    <div ng-repeat="board in userBoards | filter: searchText.search" class="col-sm-4 board">
+        <a ng-href="#!/boards/{{board.id}}">
+            <div class="board-wrapper">
+                <div class="row">
+                    <div ng-repeat="item in board.pins">
+                        <img class="poster col-sm-4" src="{{item.url}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <h2 class="text-capitalize">{{board.title}}</h2>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
