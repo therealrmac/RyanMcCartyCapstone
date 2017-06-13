@@ -1,0 +1,52 @@
+<h1>Make a New Profile</h1>
+<form class="form--demo col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+  <div class="form-group">
+    <label>Full Name</label>
+    <input type="text" class="form-control" placeholder="Your name is?" ng-model="profile.name"></input>
+  </div>
+  <div class="form-group">
+    <label>Photo or URL</label>
+    <input type="text" class="form-control" placeholder="Upload your image here" ng-model="profile.photo"></input>
+  </div>
+  <div class="form-group">
+    <label>City</label>
+    <input type="text" class="form-control" placeholder="Full name of city" ng-model="profile.city"></input>
+  </div>
+    <div class="form-group">
+    <label>State</label>
+    <input type="text" class="form-control" placeholder="Abbreviation of State" ng-model="profile.state"></input>
+  </div>
+    <div class="form-group">
+    <label>Instrument(s)</label>
+    <input type="text" class="form-control" placeholder="What do you play?" ng-model="profile.instrument"></input>
+  </div>
+    <div class="form-group">
+    <label>Play Style</label>
+    <input type="text" class="form-control" placeholder="What kind of music do you like or play" ng-model="profile.style"></input>
+  </div>
+    <div class="form-group">
+    <label>Previous Experience | Past Gigs</label>
+    <input type="text" class="form-control" placeholder="Quick snippet of your music life" ng-model="profile.gigs"></input>
+  </div>
+<!--   <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><label>Boards</label>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li ng-repeat="item in boards" ng-click="addBoard(item.id, item.title)">{{item.title}}</li>
+      <li><input type="text" placeholder="new board" ng-model="temp" ng-keypress="newBoard($event)"></input></li>
+    </ul>
+    {{boardName}}
+  </div><br> -->
+  <div class="col-xs-6 text-right">
+    <section class="auth-form">
+      <div>
+        Email: <input type="email" placeholder="Email address" ng-model="auth.email" autofocus="true">
+      </div>
+      <div>
+        Password: <input type="password" placeholder="Password" ng-model="auth.password">
+      </div>
+      <div>
+  <div class="text-center">
+    <button type="button" ng-click="register(auth,profile)" class="btn btn-default btn-primary">Register</button>
+  </div>
+</form>
