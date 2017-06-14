@@ -59,7 +59,7 @@ app.config($routeProvider=>{
         controller: "EditProfileCtrl",
         resolve: {isAuth}
     })
-    .when("/profile/viewBand/:bandId",{
+    .when("/profile/viewBand/:bandName",{
         templateUrl: "partials/yourBands.html",
         controller: "BandCtrl",
         resolve: {isAuth}
