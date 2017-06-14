@@ -2,7 +2,8 @@
 app.factory("DataFactory", function($q, $http, fbcreds) {
 
     const addFriend = (user, friend) => {
-        let obj = JSON.stringify(" ");
+        console.log("the friend is", friend);
+        let obj = JSON.stringify(friend);
         return $q((resolve, reject) => {
             $http.put(`${fbcreds.databaseURL}/profiles/${user}/friends/${friend}.json`, obj)
             .then( resolve )
@@ -17,7 +18,51 @@ app.factory("DataFactory", function($q, $http, fbcreds) {
             .catch( reject );
         });
     };
+    const makeBand= (user,band)=>{
+        console.log("what is band", band);
+        console.log("and user is", user);
+        let obj= JSON.stringify(band);
+        return $q((resolve,reject)=>{
+            $http.put(`${fbcreds.databaseURL}/profiles/${user}/bands/${band.name}.json`, obj)
+            .then(resolve)
+            .catch(reject);
+        });
+    };
 
+    const getBands= (user)=>{
+        return $q((resolve,reject)=>{
+            $http.get(`${fbcreds.databaseURL}/profiles/${user}/bands.json`)
+            .then((bandObj)=>{
+              let bands= [];
+              let bandColl= bandObj.data;
+              Object.keys(bandColl).forEach((key)=>{
+                bandColl[key].id= key;
+                bands.push(bandColl[key]);
+              });
+              resolve(bands);
+            })
+            .catch((error)=>{
+                reject(error);
+            });
+        });
+    };
+const getFriends= (userId)=>{
+ return $q((resolve,reject)=>{
+            $http.get(`${fbcreds.databaseURL}/profiles/${userId}.json`)
+            .then((friendObj)=>{
+              // let bands= [];
+              // let bandColl= bandObj.data;
+              // Object.keys(bandColl).forEach((key)=>{
+              //   bandColl[key].id= key;
+              //   bands.push(bandColl[key]);
+              // });
+              resolve(friendObj);
+            })
+            .catch((error)=>{
+                reject(error);
+            });
+        });
+    };
     const newProfile = (data) => {
         console.log('data is', data);
         let friends = ["none"];
@@ -54,7 +99,7 @@ app.factory("DataFactory", function($q, $http, fbcreds) {
     const getProfile = (data) => {
         console.log("data on line 49 of DataFactory is", data);
         return $q((resolve, reject) => {
-            $http.get(`${fbcreds.databaseURL}/profiles/${data.uid}.json`)
+            $http.get(`${fbcreds.databaseURL}/profiles/${data}.json`)
             .then((response) => {
                 console.log(response);
                 if(response.data === null) {
@@ -98,6 +143,7 @@ const getProfiles = () => {
 };
 
 
-    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles};
+
+    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends};
 
 });

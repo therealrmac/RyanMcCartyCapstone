@@ -1,0 +1,24 @@
+<h1>Start Your Band Here</h1>
+<form class="form--demo col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+  <div class="form-group">
+    <label>Band Name</label>
+    <input type="text" class="form-control" value="{{band.name}}" ng-model="band.name" placeholder="Text"></input>
+  </div>
+      <label>Band Photo</label>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="URL to your image source" ng-model="band.photo">
+    </div>
+  <div class="form-group">
+    <label>Members</label>
+    <select class="form-control" multiple ng-model="band.members" id="multiselect">
+      <option ng-repeat="friend in friends" value="{{friend.name}}">{{friend.name}}</option>
+    </select>
+  </div><br>
+    <label>General Info</label>
+    <div class="form-group">
+    	<input type="text" class="form-control" placeholder="Write something about your band" ng-model="band.info">
+    </div>
+  <div class="text-center">
+    <button ng-click="makeBand(band.uid)" class="btn btn-default btn-primary">Save</button>
+  </div>
+</form>

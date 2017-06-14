@@ -5,3 +5,22 @@
   max-width: 120px;
   margin-bottom: 10px;
   border-radius: 5px; }
+
+.spacing {
+  margin-left: 30%; }
+
+.msg-update-boxes {
+  padding: 5px;
+  font-size: 0.8rem;
+  color: gray; }
+
+.msg-update-boxes li {
+  list-style: none; }
+
+.msg-update-boxes p {
+  padding: 5px; }
+
+.smallBandPhoto {
+  border-radius: 15px;
+  max-width: 120px;
+  margin-top: 10px; }

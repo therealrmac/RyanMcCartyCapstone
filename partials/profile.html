@@ -1,32 +1,74 @@
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <h1>My Profile</h1>
+        <h3>{{name}}</h3>
     </div>
     <div class="col-md-1 text-right">
         <a ng-href="#!/profile/edit"><span class="biggerPlease addPin glyphicon glyphicon-pencil"></span></a>
     </div>
-    <div class="col-md-1">
-        <img class="userPhoto" src="{{photo}}">
-    </div>
+
     <div class="col-md-1 text-right">
-        <a ng-href="#!/newBoard"><span class="biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new board"></span></a>
+        <a ng-href="#!/profile/newBand"><span class="biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new band">New Band</span></a>
     </div>
 </div>
 <div class="row col-sm-10 col-sm-offset-1 userBoards">
-    <div ng-repeat="board in userBoards | filter: searchText.search" class="col-sm-4 board">
-        <a ng-href="#!/boards/{{board.id}}">
+    <div filter: searchText.search" class="col-sm-4 board">
             <div class="board-wrapper">
                 <div class="row">
-                    <div ng-repeat="item in board.pins">
-                        <img class="poster col-sm-4" src="{{item.url}}">
+                    <div>
+                    <img class="userPhoto" src="{{photo}}">
+                   
                     </div>
+                
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                    <h2 class="text-capitalize">{{board.title}}</h2>
-                    </div>
-                </div>
-            </div>
+                 <span >Info: {{gigs}}</span><br>
+                 <span>Instrument: {{instrument}}</span><br>
+                 <span>Style: {{style}}</span>
+                     <section><!-- write status updates-->
+                <form class="input-group" ng-submit="userUpdateStatus()">
+                    <input type="text" class="form-control" placeholder="Update Your Status" ng-model="update">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary bg-faded" type="submit">Update Status</button>
+                        <br/>
+                    </form>
+                    </span>
+                <ul class="list-group form-control bg-faded msg-update-boxes">
+                <b>Status Updates:</b> <br /> <!-- show posted status updates -->
+                <li ng-repeat="update in updates | orderBy:'timestamp':true">
+                    <b>{{update.timestamp}}:</b>
+                    <a ng-show="myOwnProfile" href="" ng-click="updates.$remove(update)">(remove)</a>
+                    <p>{{update.content}}</p>
+                </li>
+                <!-- <p ng-show="!updates.length">No Recent Updates</p> -->
+            </ul>
+        <!-- End Status Updates --> 
+        <br />
+
+            <ul class="list-group form-control bg-faded msg-update-boxes">
+                <b>Messages:</b> <br /> <!-- show posted messages -->
+                <li ng-repeat="message in messages | orderBy:'timestamp':true">
+                    <b>{{message.timestamp}}: {{message.from}} wrote:</b>
+                    <a ng-click="messages.$remove(message)">(remove)</a>
+                    <p>{{message.content}}</p>
+                </li>
+              <!--   <p ng-show="!messages.length">No Messages</p> -->
+            </ul>
+                    </span>
+                </form>
+            </section>
+             </div>
+         </div>
+    </div>
+</div>
+<br/>
+<div class="container">
+    <h2>Bands</h2>
+    <div ng-repeat="band in yourBands">
+        <a ng-href="#!/profile/viewBand/:bandName/">{{band.name}}
+        <img class="smallBandPhoto" src="{{band.photo}}">
         </a>
     </div>
+
+
+
 </div>
