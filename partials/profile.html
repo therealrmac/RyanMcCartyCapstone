@@ -44,7 +44,7 @@
             </ul>
         <!-- End Status Updates --> 
         <br />
-         <form class="input-group" ng-submit="addMessage()"> <!-- add message box -->
+         <form class="input-group" ng-submit="addMessage(message)"> <!-- add message box -->
             <input type="text" class="form-control" placeholder="Add a Message" ng-model="message">
             <span class="input-group-btn">
             <button class="btn btn-secondary bg-faded" type="submit">Send Message</button>
@@ -54,10 +54,10 @@
 
             <ul class="list-group form-control bg-faded msg-update-boxes">
                 <b>Messages:</b> <br /> <!-- show posted messages -->
-                <li ng-repeat="message in messages | orderBy:'timestamp':true">
-                    <b>{{message.timestamp}}: {{message.from}} wrote:</b>
+                <li ng-repeat="message in messages | orderBy:'timeStamp':true">
+                    <b>{{message.timeStamp}}: {{message.name}} wrote:</b>
                     <a ng-click="messages.$remove(message)">(remove)</a>
-                    <p>{{message.content}}</p>
+                    <p>{{message.text}}</p>
                 </li>
               <!--   <p ng-show="!messages.length">No Messages</p> -->
             </ul>
@@ -78,7 +78,7 @@
 <div class="col-sm-3 offset-lg-4">
     <h2> Friends</h2>
     <div ng-repeat="friend in friends">
-        <a ng-href="#!/user/{{friend.name}}/{{friend.uid}}/profile"><img src="{{friend.photo}}" class="friendPhoto"><span>{{friend.name}}</span></a>
+        <a ng-href="#!/users/{{friend.name}}/{{friend.uid}}/profile"><img src="{{friend.photo}}" class="friendPhoto"><span>{{friend.name}}</span></a>
 
     </div>
 

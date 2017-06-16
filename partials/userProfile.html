@@ -13,13 +13,13 @@
                 </div>
             </div>
 
-<div class="row col-sm-10 col-sm-offset-1 userBoards">
-    <div filter: searchText.search" class="col-sm-4 board">
         <h1 ng-model="friendInfo.name">{{name}}'s Profile</h1>
-<div class="board-wrapper">
+<div class="offset-lg-4"></div><div class="col-lg-6">
+    <div filter: searchText.search" class="col-xl-2 board">
+     
                 <div class="row">
                     <div>
-                    <img ng-model="friendInfo.photo" class="userPhoto" src="{{photo}}">
+                    <img class="userPhoto" src="{{photo}}">
                    
                     </div>
                 
@@ -27,39 +27,35 @@
                  <span >Info: {{gigs}}</span><br>
                  <span>Instrument: {{instrument}}</span><br>
                  <span>Style: {{style}}</span>
-                     <section><!-- write status updates-->
-
+                  <br>
                 <ul class="list-group form-control bg-faded msg-update-boxes">
-                <b>Status Updates:</b> <br /> <!-- show posted status updates -->
-                <li ng-repeat="update in updates | orderBy:'timestamp':true">
-                    <b>{{update.timestamp}}:</b>
-                    <a ng-show="myOwnProfile" href="" ng-click="updates.$remove(update)">(remove)</a>
-                    <p>{{update.content}}</p>
+                <b>Status Updates:</b><!-- show posted status updates -->
+
+                <li ng-repeat="update in updates | orderBy:'timeStamp':true">
+                    <b>{{update.timeStamp}}:</b>
+                    <p>{{update.text}}</p>
                 </li>
-                <!-- <p ng-show="!updates.length">No Recent Updates</p> -->
             </ul>
         <!-- End Status Updates --> 
         <br />
-        <form class="input-group" ng-submit="addMessage()"> <!-- add message box -->
-                <input type="text" class="form-control" placeholder="Add a Message" ng-model="message">
-                <span class="input-group-btn">
-                    <button class="btn btn-secondary bg-faded" type="submit">Send Message</button>
+         <form class="input-group" ng-submit="addMessage(message)"> <!-- add message box -->
+            <input type="text" class="form-control" placeholder="Add a Message" ng-model="message">
+            <span class="input-group-btn">
+            <button class="btn btn-secondary bg-faded" type="submit">Send Message</button>
                 </span>
             </form>
 
-            <br />
 
             <ul class="list-group form-control bg-faded msg-update-boxes">
                 <b>Messages:</b> <br /> <!-- show posted messages -->
-                <li ng-repeat="message in messages | orderBy:'timestamp':true">
-                    <b>{{message.timestamp}}: {{message.from}} wrote:</b>
-                    <a ng-show="myOwnProfile" href="" ng-click="messages.$remove(message)">(remove)</a>
-                    <p>{{message.content}}</p>
+                <li ng-repeat="message in messages | orderBy:'timeStamp':true">
+                    <b>{{message.timeStamp}}: {{message.name}} wrote:</b>
+                    <a ng-click="messages.$remove(message)">(remove)</a>
+                    <p>{{message.text}}</p>
                 </li>
-                <p ng-show="!messages.length">No Messages</p>
+              <!--   <p ng-show="!messages.length">No Messages</p> -->
             </ul>
-                </form>
-            </section>
+                    </span>
              </div>
          </div>
     </div>

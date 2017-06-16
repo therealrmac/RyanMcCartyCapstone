@@ -35,12 +35,12 @@ app.config($routeProvider=>{
         controller: "UsersCtrl",
         resolve: {isAuth}
     })
-    .when("/user/:userName/:userId/profile",{
+    .when("/users/:userName/:userId/profile",{
         templateUrl: "partials/UserProfile.html",
         controller: "UserProfileCtrl",
         resolve: {isAuth}
     })
-    .when("/user/viewBand/:bandName/:bandId",{
+    .when("/users/viewBand/:bandName/:bandId",{
         templateUrl: "partials/userBands.html",
         controller: "UserBandCtrl",
         resolve: {isAuth}
