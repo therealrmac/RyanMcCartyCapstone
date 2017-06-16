@@ -2,29 +2,26 @@
 app.controller("UsersCtrl", function($scope, AuthFactory, $window, $location, DataFactory, SearchTermData){
     $scope.searchText = SearchTermData;
     let user= AuthFactory.getUser();
+    console.log("user ", user);
 
     let populatePeople = () => {
         $scope.friendList = [];
         $scope.nonFriends = [];
         DataFactory.getProfiles()
         .then((data) => {
-            let me = data[user];
-            console.log(data, "data", me, "me");
             for(let people in data) {
-                try {
-                    let ding = me.friends[people];
-                    if(ding == " ") {
-                        $scope.friendList.push(data[people]);
-                    } else {
+                    if(people !== user) {
                         $scope.nonFriends.push(data[people]);
+                        
                     }
-                } catch (e) {
-                    $scope.nonFriends.push(data[people]);
-                }
-                console.log($scope.nonFriends, "non");
-            } 
+                    //console.log("scope nonFriends uid");
+                    //console.log("people data", people.uid);
+            }
         });
     };
+
+
+
 
  populatePeople();
 });

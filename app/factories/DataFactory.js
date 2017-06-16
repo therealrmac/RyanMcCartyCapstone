@@ -1,5 +1,7 @@
 "use strict";
 app.factory("DataFactory", function($q, $http, fbcreds) {
+    let fbNotification= firebase.database().ref('notifications');
+    console.log("fb notifications", fbNotification);
 
     const addFriend = (user, friend) => {
         console.log("the friend is", friend);
@@ -142,8 +144,96 @@ const getProfiles = () => {
     });
 };
 
+const getBand= (userId,bandName) =>{
+    console.log("userId is", userId);
+    console.log("bandName is", bandName);
+    return $q((resolve,reject)=>{
+        $http.get(`${fbcreds.databaseURL}/profiles/${userId}/bands/${bandName}.json`)
+        .then((bandObj)=>{
+            let band= bandObj.data;
+            resolve(band);
+        })
+        .catch((error)=>{
+            reject(error);
+        });
+    });
+};
+
+let yourRequest= (database, user, userId)=>{
+    return $q(resolve =>{
+        database.child(user).child(userId).once('value')
+        .then((x)=>{
+            if(user !== userId){
+                if(x.exists()){
+                    resolve(true);
+                } else{
+                    resolve(false);
+                }
+            }
+        });
+    });
+};
 
 
-    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends};
+let userRequest=(database, user, userId)=>{
+    return $q(resolve =>{
+        database.child(userId).child(user).once('value')
+        .then((x)=>{
+            if(x.exists()){
+                resolve(true);
+            } else {
+                resolve(false);
+            }
+        });
+    });
+};
+
+let sendRequest=(userId, yourId, text)=>{
+    let obj= {
+        userid: userId,
+        yourid: yourId,
+        message: text
+    };
+    let x= fbNotification.child(userId);
+    x.push(obj);
+};
+
+let yourStatus=(yourId, text)=>{
+    console.log("yourId", yourId);
+    console.log("text", text);
+    return $q((resolve,reject)=>{
+        let obj= JSON.stringify(text);
+        $http.put(`${fbcreds.databaseURL}/profiles/${yourId}/status/${text.ranNum}.json`,obj)
+        .then(event=>{
+            resolve(event);
+        })
+        .catch(error=>{
+            reject(error);
+        });
+    });
+};
+
+
+//get all status's
+let getStatus=(yourId)=>{
+    console.log("yourId", yourId);
+    let x=[];
+    return $q((resolve,reject)=>{
+        $http.get(`${fbcreds.databaseURL}/profiles/${yourId}/status.json`)
+      .then( (userObj) => {
+        let userColl = userObj.data;
+        Object.keys(userColl).forEach((key)=>{
+          userColl[key].id= key;
+          x.push(userColl[key]);
+        });
+        resolve(x);
+        })
+        .catch((error)=>{
+            reject(error);
+        });
+    });
+};
+
+    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus};
 
 });

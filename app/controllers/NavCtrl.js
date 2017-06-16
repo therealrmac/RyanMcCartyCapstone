@@ -1,6 +1,9 @@
 "use strict";
 
 app.controller('NavCtrl', function ($scope, AuthFactory, $window, SearchTermData, DataFactory) {
+  let you= AuthFactory.getUser();
+  $scope.userId;
+  console.log("user id in nav is", $scope.userId);
 
   $scope.isLoggedIn = false;
   $scope.searchText = SearchTermData;
