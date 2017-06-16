@@ -40,8 +40,9 @@ app.config($routeProvider=>{
         controller: "UserProfileCtrl",
         resolve: {isAuth}
     })
-    .when("/user/:userId/profile/viewBand/:bandId",{
+    .when("/user/viewBand/:bandName/:bandId",{
         templateUrl: "partials/userBands.html",
+        controller: "UserBandCtrl",
         resolve: {isAuth}
     })
     .when("/profile",{
@@ -79,7 +80,7 @@ app.run(($location, fbcreds)=>{
    let authConfig = {
     apiKey: cred.apiKey,
     authDomain: cred.authDomain,
-    databaseURL: cred.databaseUrl
+    databaseURL: cred.databaseURL
    };
 
    firebase.initializeApp(authConfig);

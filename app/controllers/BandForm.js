@@ -2,7 +2,7 @@
 app.controller("BandForm", function($scope, AuthFactory, $window, $location, DataFactory){
     let user= AuthFactory.getUser();
     let x= [];
-     let obj;
+    let obj;
 
     DataFactory.getProfile(user)
     .then((event)=>{

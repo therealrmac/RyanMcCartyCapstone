@@ -1,0 +1,25 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 col-md-offset-5">
+      <h1>{{band.name}}</h1>
+    </div>
+    <div class="col-md-1 col-md-offset-2 boardStuff text-center">
+      <a ng-href="#!/boards">
+        <span class="glyphicon glyphicon-remove" ng-click="removeBand()" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="col-md-1 text-center">
+ 	<a ng-href="#!/profile/viewBand/:bandName/edit"><span class="glyphicon glyphicon-edit"></span></a>
+      </a>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="row">
+  <img src="{{band.photo}}" class="bandPhoto">
+      <p>Active members are: {{band.members}}</p>
+      <p>{{band.info}}</p>
+  </div>
+</div>

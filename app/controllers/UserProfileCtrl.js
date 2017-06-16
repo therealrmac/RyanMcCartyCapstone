@@ -6,15 +6,8 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
     //console.log("User name is", user.name);
     let Youser= AuthFactory.getUser();
     //console.log("Youser is", Youser);
-    $scope.friendName = $routeParams.friendName;
-    $scope.friendInfo= {
-        name: user.name,
-        photo: user.photo
-    };
-    console.log("what is scope friendInfo", $scope.friendInfo);
     DataFactory.getProfile( user)
     .then( stuff => {
-        console.log("data", stuff.data);
         $scope.uid = stuff.data.uid;
         $scope.photo = stuff.data.photo;
         $scope.name= stuff.data.name;
@@ -30,7 +23,6 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
         .then( response => {
             console.log("yeah add");
             $scope.friend= false;
-            console.log("what is scope friend", $scope.friend);
             $scope.apply();
         }).catch( error => {
             console.log(error, "error");
@@ -41,7 +33,6 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
         .then( response => {
             console.log("yeah remove");
             $scope.friend= true;
-            console.log("what is scope friend", $scope.friend);
             $scope.apply();
         }).catch( error => {
             console.log(error, "error");
@@ -49,9 +40,29 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
     };
     DataFactory.getBands(user)
     .then((bands)=>{
-        console.log("bands is", bands);
         $scope.yourBands= bands;
     });
 
+    let x= [];
+    let obj;
+
+    DataFactory.getProfile(user)
+    .then((event)=>{
+        $scope.user= event.data;
+          for(obj in $scope.user.friends){
+            //console.log("obj", obj);
+        DataFactory.getFriends(obj)
+            .then((data)=>{
+                if(data.data.uid !== Youser){
+                    x.push(data.data);
+                }
+                
+               // console.log("x is", x);
+                $scope.friends= x;
+            });
+        }
+    }); 
+
+     
 });
 

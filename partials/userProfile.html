@@ -2,7 +2,7 @@
     <div class="col-md-4 col-md-offset-4">
     </div>
     <div class="col-md-1 text-right">
-        <a ng-show="!friends" ng-click="addFriend(uid)"><span  class="biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new board">Add Friend</span></a>
+        <a ng-click="addFriend(uid)"><span  class="biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new board">Add Friend</span></a>
     </div>
 </div>
  <div class="col-md-4 friend">
@@ -68,11 +68,18 @@
 <div class="container">
     <h2>Bands</h2>
     <div ng-repeat="band in yourBands">
-        <a ng-href="#!/user/viewBand/:bandName/">{{band.name}}
+        <a ng-href="#!/user/viewBand/{{band.name}}/{{band.uid}}">{{band.name}}
         <img class="smallBandPhoto" src="{{band.photo}}">
         </a>
     </div>
+<div class="col-md-1">
+    <h2> Friends</h2>
+    <div ng-repeat="friend in friends">
+        <a ng-href="#!/user/{{friend.name}}/{{friend.uid}}/profile"><img src="{{friend.photo}}" class="friendPhoto"><span>{{friend.name}}</span></a>
 
+    </div>
+
+</div>
 
 
 </div>
