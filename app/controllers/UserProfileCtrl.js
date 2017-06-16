@@ -2,9 +2,11 @@
 app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams){
 
     let user = $routeParams.userId;
-    $scope.friend= false;
-    //console.log("User name is", user.name);
+    let proName= $routeParams.userName;
+    console.log("routeParams", proName);
     let Youser= AuthFactory.getUser();
+    $scope.friend= false;
+    let date= new Date();
     //console.log("Youser is", Youser);
     DataFactory.getProfile( user)
     .then( stuff => {
@@ -63,6 +65,50 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
         }
     }); 
 
+    let name;
+    DataFactory.getProfile(Youser)
+    .then(data=>{
+        console.log("data user profile", data.data);
+        name= data.data.name;
+    });
+
+     DataFactory.getStatus(user)
+        .then((event)=>{
+            console.log("hi", event);
+            $scope.updates= event;
+            //$location.url('/profile');
+    });
+
+
+$scope.addMessage= (text) =>{
+    let index=  (new Date()).valueOf();
+        $scope.messages={
+            text: text,
+            uid: Youser,
+            date: (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear(),
+            timeStamp: date.toLocaleString(),
+            ranNum: index,
+            name: name
+        };
+    DataFactory.yourMessage(user, $scope.messages)
+    .then((event)=>{
+
+        DataFactory.getMessages(user)
+        .then((event)=>{
+            console.log("hi", event);
+            $scope.messages= event;
+            $location.url(`/users/${proName}/${user}/profile`);
+        });
+    });
+};
+   
+
+    DataFactory.getMessages(user)
+        .then((event)=>{
+            console.log("hi", event);
+            $scope.messages= event;
+            $location.url(`/users/${proName}/${user}/profile`);
+    });
      
 });
 

@@ -34,6 +34,7 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
 
     $scope.yourName = $routeParams.yourName;
 
+//GET CURRENT USERS PROFILE 
     DataFactory.getProfile( Youser)
     .then( stuff => {
         $scope.uid = stuff.data.uid;
@@ -45,11 +46,16 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
         $scope.city= stuff.data.city;
         $scope.state= stuff.data.state;
     });
+    //GET CURRENT USERS BANDS
     DataFactory.getBands(Youser)
     .then((bands)=>{
         $scope.yourBands= bands;
     });
+//END GETTING CURRENT USER PROFILE AND BANDS
 
+
+
+//GET FRIENDS OF A CURRENT USER
     let x= [];
     let obj;
 
@@ -64,31 +70,77 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
         });
         }
     });
+//END GETTING FRIENDS OF CURRENT USER
 
 
+//NEED A NAME TO GO ALONG WITH THE MESSAGE YOU RIGHT
+let name;
+DataFactory.getProfile(Youser)
+.then(data=>{
+    name= data.data.name;
+});
+//END GET NAME 
 
 
+//MAKE A NEW STATUS AND HAVE IT UPDATE IN REAL TIME
 $scope.updateStatus= (text) =>{
+    let index=  (new Date()).valueOf();
         $scope.status={
             text: text,
             uid: Youser,
             date: (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear(),
             timeStamp: date.toLocaleString(),
-            ranNum: Math.floor(Math.random()*100000+1)
+            ranNum: index
         };
-console.log("status scope", $scope.status);
-    console.log('text', text);
     DataFactory.yourStatus(Youser, $scope.status)
     .then((event)=>{
-        console.log("event", event);
+
+        DataFactory.getStatus(Youser)
+        .then((event)=>{
+            console.log("hi", event);
+            $scope.updates= event;
+            $location.url('/profile');
+        });
     });
 };
-
     DataFactory.getStatus(Youser)
     .then((event)=>{
         console.log("hi", event);
         $scope.updates= event;
+        $location.url('/profile');
     });
+//END STATUS 
+
+
+//ADD MESSAGES TO YOUR PROFILE/RESPOND TO MESSAGES  
+$scope.addMessage= (text) =>{
+    let index=  (new Date()).valueOf();
+        $scope.messages={
+            text: text,
+            uid: Youser,
+            date: (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear(),
+            timeStamp: date.toLocaleString(),
+            ranNum: index,
+            name: name
+        };
+    DataFactory.yourMessage(Youser, $scope.messages)
+    .then((event)=>{
+
+        DataFactory.getMessages(Youser)
+        .then((event)=>{
+            console.log("hi", event);
+            $scope.messages= event;
+            $location.url('/profile');
+        });
+    });
+};
+    DataFactory.getMessages(Youser)
+    .then((event)=>{
+        console.log("hi", event);
+        $scope.messages= event;
+        $location.url('/profile');
+    });
+//END MESSAGES
 
 
 });

@@ -5,7 +5,7 @@
         <div ng-repeat="people in nonFriends | filter: searchText.search" class="smallUsers ">
             <div class="col-md-4 non-friend">
                 <div>
-                <a ng-href="#!/user/{{people.name}}/{{people.uid}}/profile">
+                <a ng-href="#!/users/{{people.name}}/{{people.uid}}/profile">
                     <img class="userPhotos" src="{{people.photo}}">
                     {{people.name}}
                     </a>

@@ -99,7 +99,6 @@ const getFriends= (userId)=>{
         });
     };
     const getProfile = (data) => {
-        console.log("data on line 49 of DataFactory is", data);
         return $q((resolve, reject) => {
             $http.get(`${fbcreds.databaseURL}/profiles/${data}.json`)
             .then((response) => {
@@ -212,7 +211,20 @@ let yourStatus=(yourId, text)=>{
         });
     });
 };
-
+let yourMessage=(yourId, text)=>{
+    console.log("yourId", yourId);
+    console.log("text", text);
+    return $q((resolve,reject)=>{
+        let obj= JSON.stringify(text);
+        $http.put(`${fbcreds.databaseURL}/profiles/${yourId}/message/${text.ranNum}.json`,obj)
+        .then(event=>{
+            resolve(event);
+        })
+        .catch(error=>{
+            reject(error);
+        });
+    });
+};
 
 //get all status's
 let getStatus=(yourId)=>{
@@ -234,6 +246,25 @@ let getStatus=(yourId)=>{
     });
 };
 
-    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus};
+let getMessages=(yourId)=>{
+    console.log("yourId", yourId);
+    let x=[];
+    return $q((resolve,reject)=>{
+        $http.get(`${fbcreds.databaseURL}/profiles/${yourId}/message.json`)
+      .then( (userObj) => {
+        let userColl = userObj.data;
+        Object.keys(userColl).forEach((key)=>{
+          userColl[key].id= key;
+          x.push(userColl[key]);
+        });
+        resolve(x);
+        })
+        .catch((error)=>{
+            reject(error);
+        });
+    });
+};
+
+    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus, yourMessage, getMessages};
 
 });
