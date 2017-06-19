@@ -265,6 +265,45 @@ let getMessages=(yourId)=>{
     });
 };
 
-    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus, yourMessage, getMessages};
+let removeStatus=(yourId,data)=>{
+    return $q((resolve,reject)=>{
+        $http.delete(`${fbcreds.databaseURL}/profiles/${yourId}/status/${data.ranNum}.json`)
+        .then((x)=>{
+            resolve(x);
+        })
+        .catch(error=>{
+            reject(error);
+        });
+    });
+};
+let removeMessage=(yourId,data)=>{
+    console.log("data on remove message is", data);
+    console.log("your id is", yourId);
+    return $q((resolve,reject)=>{
+        $http.delete(`${fbcreds.databaseURL}/profiles/${yourId}/message/${data.ranNum}.json`)
+        .then((x)=>{
+            resolve(x);
+        })
+        .catch(error=>{
+            reject(error);
+        });
+    });
+};
+
+let editBand = (uid, obj) => {
+    console.log("uid is", uid);
+    console.log("obj is", obj);
+        return $q( (resolve, reject) => {
+            let newObj = JSON.stringify(obj);
+            $http.patch(`${fbcreds.databaseURL}/profiles/${uid}/bands/${obj.name}.json`, newObj)
+            .then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    };
+
+    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus, yourMessage, getMessages, removeStatus, removeMessage, editBand};
 
 });

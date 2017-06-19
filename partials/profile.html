@@ -26,10 +26,10 @@
                  <span>Instrument: {{instrument}}</span><br>
                  <span>Style: {{style}}</span>
                      <section><!-- write status updates-->
-                <form class="input-group" ng-submit="updateStatus(update)">
-                    <input type="text" class="form-control" placeholder="Update Your Status" ng-model="update">
+                <form class="input-group " ng-submit="updateStatus(update)">
+                    <input type="text" class="statusInput   form-control" placeholder="Update Your Status" ng-model="update">
                     <span class="input-group-btn">
-                        <button class="btn btn-secondary bg-faded" type="submit">Update Status</button>
+                        <button class="btn status btn-secondary bg-faded" type="submit">Update Status</button>
                     </span>
                     </form>
                     </section>
@@ -38,7 +38,7 @@
 
                 <li ng-repeat="update in updates | orderBy:'timeStamp':true">
                     <b>{{update.timeStamp}}:</b>
-                    <a href="" ng-click="updates.$remove(update)">(remove)</a>
+                    <a href="" ng-click="removeStatus(update)">(remove)</a>
                     <p>{{update.text}}</p>
                 </li>
             </ul>
@@ -56,7 +56,7 @@
                 <b>Messages:</b> <br /> <!-- show posted messages -->
                 <li ng-repeat="message in messages | orderBy:'timeStamp':true">
                     <b>{{message.timeStamp}}: {{message.name}} wrote:</b>
-                    <a ng-click="messages.$remove(message)">(remove)</a>
+                    <a ng-click="removeMessage(message)">(remove)</a>
                     <p>{{message.text}}</p>
                 </li>
               <!--   <p ng-show="!messages.length">No Messages</p> -->
