@@ -1,3 +1,9 @@
+html {
+  font-size: 16px !important; }
+
+.navbar {
+  background-color: #ecf0f1; }
+
 .jamIt {
   max-width: 100px; }
 
@@ -33,6 +39,9 @@ a:hover {
 .form-control {
   height: auto !important; }
 
+.search-bar-spacing {
+  margin-bottom: 20px; }
+
 .paddingleft {
   padding-left: 5px; }
 
@@ -53,7 +62,8 @@ a:hover {
 .smallBandPhoto {
   border-radius: 15px;
   max-width: 120px;
-  margin-top: 10px; }
+  margin-top: 10px;
+  margin-bottom: 20px; }
 
 .friendPhoto {
   border-radius: 50%;
@@ -64,3 +74,13 @@ a:hover {
   border-radius: 15px;
   max-width: 250px;
   margin-top: 20px; }
+
+.splashImg {
+  width: 2000px;
+  max-width: 100%; }
+
+.backImg {
+  background-image: url("https://acousticalsolutions.com/wp-content/uploads/2015/05/four-piece-band-silhouette-rocking-out2.jpg");
+  background-repeat: none;
+  z-index: 0;
+  opacity: 0.3; }

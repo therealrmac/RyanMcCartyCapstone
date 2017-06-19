@@ -1,8 +1,11 @@
 "use strict";
-app.controller("BandForm", function($scope, AuthFactory, $window, $location, DataFactory){
+app.controller("BandForm", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams){
     let user= AuthFactory.getUser();
     let x= [];
     let obj;
+
+    let date= new Date();
+
 
     DataFactory.getProfile(user)
     .then((event)=>{
@@ -18,20 +21,22 @@ app.controller("BandForm", function($scope, AuthFactory, $window, $location, Dat
         });
         }
     });
-
-    
-     $scope.band = {
-        name: "",
-        info: "",
-        uid: user,
-        members: ""
-     };
+ 
+let index=  (new Date()).valueOf();
+ $scope.band = {
+    ranNum: index,
+    name: "",
+    info: "",
+    uid: user,
+    members: ""
+ };
 
    
    
 
 
     $scope.makeBand = (id) => {
+
         DataFactory.makeBand($scope.user.uid, $scope.band)
         .then( response => {
             $location.url("/profile");

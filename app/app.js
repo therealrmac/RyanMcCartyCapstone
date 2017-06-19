@@ -40,14 +40,19 @@ app.config($routeProvider=>{
         controller: "UserProfileCtrl",
         resolve: {isAuth}
     })
-    .when("/users/viewBand/:bandName/:bandId",{
+    .when("/users/:uid/viewBand/:bandName/:ranNum",{
         templateUrl: "partials/userBands.html",
         controller: "UserBandCtrl",
         resolve: {isAuth}
-    })
+    })    
     .when("/profile",{
         templateUrl: "partials/profile.html",
         controller: "ProfileCtrl",
+        resolve: {isAuth}
+    })
+    .when("/profile/viewBand/:bandName/:ranNum/edit",{
+        templateUrl: "partials/editBand.html",
+        controller: "EditBandCtrl",
         resolve: {isAuth}
     })
     .when("/profile/newBand",{
@@ -60,14 +65,9 @@ app.config($routeProvider=>{
         controller: "EditProfileCtrl",
         resolve: {isAuth}
     })
-    .when("/profile/viewBand/:bandName",{
+    .when("/profile/viewBand/:bandName/:ranNum",{
         templateUrl: "partials/yourBands.html",
         controller: "BandCtrl",
-        resolve: {isAuth}
-    })
-    .when("/profile/viewBand/:bandName/edit",{
-        templateUrl: "partials/editBand.html",
-        controller: "EditBandCtrl",
         resolve: {isAuth}
     })
     .otherwise("/");

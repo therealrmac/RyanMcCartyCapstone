@@ -2,9 +2,18 @@
 app.controller("EditBandCtrl", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams){
     let user= AuthFactory.getUser();
      $routeParams.userId = user;
+    let band= $routeParams.ranNum;
+        
+    console.log("band name is", $scope.band);
       console.log("user", user);
     let x= [];
     let obj;
+
+    DataFactory.getBand(user,band)
+    .then((data)=>{
+        console.log("data from edit band is", data);
+        $scope.band= data;
+    });
 
     DataFactory.getProfile(user)
     .then((event)=>{
@@ -13,11 +22,13 @@ app.controller("EditBandCtrl", function($scope, AuthFactory, $window, $location,
         DataFactory.getFriends(obj)
         .then((data)=>{
             x.push(data.data);
-            console.log("x is", x);
+            //console.log("x is", x);
             $scope.friends= x;
         });
         }
     });
+
+
 
       $scope.editBand = () => {
         

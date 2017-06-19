@@ -1,18 +1,21 @@
 "use strict";
 app.controller("UserBandCtrl", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams){
-let bandId= $routeParams.bandId;
-console.log("and user is", bandId);
-let paramUser= $routeParams.bandName;
-console.log("param user is", $routeParams.bandName);
+let user= $routeParams.uid;
+console.log("and user is", user);
+console.log("param user is", $routeParams);
+let paramUser= $routeParams.ranNum;
+
+
+
+console.log("param user is", $routeParams);
 let x=[];
-
-    DataFactory.getBand(bandId, paramUser)
+    DataFactory.getBand(user, paramUser)
     .then((data)=>{
-        console.log("data in UserBandCtrl is", data);
+        //console.log("data in BandCtrl is", data.members);
         $scope.band= data;
-        $scope.people= data.members
-        console.log("scope band is", $scope.band);
-
+        console.log("band name", $scope.band.name);
+        $scope.people= data.members;
+        //console.log("scope band is", $scope.people);
     });
 
 
