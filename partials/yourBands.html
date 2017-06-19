@@ -19,7 +19,11 @@
 <div class="col-md-12">
   <div class="row">
   <img src="{{band.photo}}" class="bandPhoto">
-      <p>Active members are: {{band.members}}</p>
-      <p>{{band.info}}</p>
+  <p>Active members are:</p> 
+    <div ></div>
+       <b ng-repeat="item in people">{{item}}, </b>
+       </div>
+       <p>General Info For: {{band.name}}</p>
+      <b>{{band.info}}</b>
   </div>
 </div>

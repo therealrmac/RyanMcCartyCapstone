@@ -10,6 +10,7 @@ let x=[];
     .then((data)=>{
         console.log("data in UserBandCtrl is", data);
         $scope.band= data;
+        $scope.people= data.members
         console.log("scope band is", $scope.band);
 
     });

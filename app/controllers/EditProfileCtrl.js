@@ -7,7 +7,7 @@ app.controller("EditProfileCtrl", function($scope, AuthFactory, $window, $locati
   $routeParams.userId = user;
   console.log("user", user);
 
-  DataFactory.getProfile({uid: user})
+  DataFactory.getProfile( user)
   .then( stuff => {
     $scope.profile = stuff.data;
   });

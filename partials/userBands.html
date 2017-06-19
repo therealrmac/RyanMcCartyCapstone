@@ -1,11 +1,7 @@
-
 <div class="container">
   <div class="row">
     <div class="col-md-2 col-md-offset-5">
       <h1>{{band.name}}</h1>
-    </div>
-    <div class="col-md-1 col-md-offset-2 boardStuff text-center">
-
     </div>
     </div>
     </div>
@@ -14,7 +10,11 @@
 <div class="col-md-12">
   <div class="row">
   <img src="{{band.photo}}" class="bandPhoto">
-      <p><strong>Active members are:</strong> {{band.members}}</p>
-      <p><strong>Band Information:</strong> {{band.info}}</p>
+  <p>Active members are:</p> 
+    <div ></div>
+       <b ng-repeat="item in people">{{item}}, </b>
+       </div>
+       <p>General Info For: {{band.name}}</p>
+      <b>{{band.info}}</b>
   </div>
 </div>

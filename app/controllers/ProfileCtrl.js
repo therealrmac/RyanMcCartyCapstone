@@ -143,4 +143,38 @@ $scope.addMessage= (text) =>{
 //END MESSAGES
 
 
+
+//REMOVE A SPECIFIC STATUS UPDATE FROM FIREBASE 
+$scope.removeStatus= (text)=>{
+    console.log('remove text is', text);
+    DataFactory.removeStatus(Youser,text)
+    .then(data=>{
+        DataFactory.getStatus(Youser)
+            .then((event)=>{
+                console.log("hi", event);
+                $scope.updates= event;
+                $location.url('/profile');
+   
+        });
+    });
+};
+//END STATUS REMOVAL
+
+
+
+$scope.removeMessage= (text)=>{
+    console.log('remove text is', text);
+    DataFactory.removeMessage(Youser,text)
+    .then(data=>{
+        DataFactory.getMessages(Youser)
+            .then((event)=>{
+                console.log("hi", event);
+                $scope.messages= event;
+                $location.url('/profile');
+   
+        });
+    });
+};
+
+
 });
