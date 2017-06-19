@@ -73,7 +73,7 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
 //END GETTING FRIENDS OF CURRENT USER
 
 
-//NEED A NAME TO GO ALONG WITH THE MESSAGE YOU RIGHT
+//NEED A NAME TO GO ALONG WITH THE MESSAGE YOU WRIGHT
 let name;
 DataFactory.getProfile(Youser)
 .then(data=>{

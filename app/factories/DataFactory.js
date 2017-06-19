@@ -25,13 +25,14 @@ app.factory("DataFactory", function($q, $http, fbcreds) {
         console.log("and user is", user);
         let obj= JSON.stringify(band);
         return $q((resolve,reject)=>{
-            $http.put(`${fbcreds.databaseURL}/profiles/${user}/bands/${band.name}.json`, obj)
+            $http.put(`${fbcreds.databaseURL}/profiles/${user}/bands/${band.ranNum}.json`, obj)
             .then(resolve)
             .catch(reject);
         });
     };
 
     const getBands= (user)=>{
+        console.log("get bands user", user);
         return $q((resolve,reject)=>{
             $http.get(`${fbcreds.databaseURL}/profiles/${user}/bands.json`)
             .then((bandObj)=>{
@@ -292,10 +293,10 @@ let removeMessage=(yourId,data)=>{
 
 let editBand = (uid, obj) => {
     console.log("uid is", uid);
-    console.log("obj is", obj);
+    console.log("obj is", obj.name);
         return $q( (resolve, reject) => {
             let newObj = JSON.stringify(obj);
-            $http.patch(`${fbcreds.databaseURL}/profiles/${uid}/bands/${obj.name}.json`, newObj)
+            $http.patch(`${fbcreds.databaseURL}/profiles/${uid}/bands/${obj.ranNum}.json`, newObj)
             .then((response) => {
                 resolve(response);
             }).catch((error) => {
@@ -304,6 +305,20 @@ let editBand = (uid, obj) => {
         });
     };
 
-    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus, yourMessage, getMessages, removeStatus, removeMessage, editBand};
+let removeBand= (uid, obj)=>{
+    console.log("uid is", uid);
+    console.log("obj is", obj);
+    return $q((resolve,reject)=>{
+        $http.delete(`${fbcreds.databaseURL}/profiles/${uid}/bands/${obj}.json`)
+        .then(data=>{
+            resolve(data);
+        })
+        .catch(error=>{
+            reject(error);
+        });
+    });
+};
+
+    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus, yourMessage, getMessages, removeStatus, removeMessage, editBand, removeBand};
 
 });

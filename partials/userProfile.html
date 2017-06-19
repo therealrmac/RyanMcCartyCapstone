@@ -63,7 +63,7 @@
 <div class="container">
     <h2>Bands</h2>
     <div ng-repeat="band in yourBands">
-        <a ng-href="#!/users/viewBand/{{band.name}}/{{band.uid}}">{{band.name}}
+        <a ng-href="#!/users/{{band.uid}}/viewBand/{{band.name}}/{{band.ranNum}}">{{band.name}}
         <img class="smallBandPhoto" src="{{band.photo}}">
         </a>
     </div>

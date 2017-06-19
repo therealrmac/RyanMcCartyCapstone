@@ -65,6 +65,32 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
         }
     }); 
 
+    // let y=[];
+    // let newObj
+
+    // DataFactory.getProfile(user)
+    // .then((event)=>{
+    //     $scope.user= event.data;
+    //     console.log("scope user", $scope.user);
+    //       for(newObj in $scope.user.friends){
+    //         console.log("newObj", newObj);
+    //         DataFactory.getBands(newObj)
+    //             .then((data)=>{
+    //                 console.log("what is data?", data);
+    //                 for(let chon in data.data){
+    //                     console.log("chon is",chon);
+    //                      if(data.data.uid !== Youser){
+    //                     y.push(data.data);
+    //                 }
+                   
+    //             }
+                
+    //            // console.log("x is", x);
+    //             //$scope.friends= x;
+    //         });
+    //     }
+    // }); 
+
     let name;
     DataFactory.getProfile(Youser)
     .then(data=>{
