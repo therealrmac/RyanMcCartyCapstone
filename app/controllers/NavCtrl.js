@@ -2,7 +2,8 @@
 
 app.controller('NavCtrl', function ($scope, AuthFactory, $window, SearchTermData, DataFactory) {
   let you= AuthFactory.getUser();
-  console.log("user id in nav is", $scope.userId);
+  console.log("current user is", you);
+
 
   $scope.isLoggedIn = false;
   $scope.searchText = SearchTermData;

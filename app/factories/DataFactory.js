@@ -67,13 +67,13 @@ const getFriends= (userId)=>{
         });
     };
     const newProfile = (data) => {
-        console.log('data is', data);
+        console.log('data on newProfile is', data);
         let friends = ["none"];
         let profile = {
             uid: data.uid,
-            photo: data.photo,
+            photo: data.photoURL,
             email: data.email,
-            name: data.name,
+            name: data.displayName,
             instrument: data.instrument,
             city: data.city,
             state: data.state,
@@ -100,10 +100,11 @@ const getFriends= (userId)=>{
         });
     };
     const getProfile = (data) => {
+        console.log("data on getProfile", data);
         return $q((resolve, reject) => {
-            $http.get(`${fbcreds.databaseURL}/profiles/${data}.json`)
+            $http.get(`${fbcreds.databaseURL}/profiles/${data.uid}.json`)
             .then((response) => {
-                console.log(response);
+                console.log("get profile response rd",response.data);
                 if(response.data === null) {
                     newProfile(data);
                 } else {
@@ -115,6 +116,21 @@ const getFriends= (userId)=>{
             });
         });
     };
+
+    const getYourProfile = (data) => {
+        console.log("data on getProfile", data);
+        return $q((resolve, reject) => {
+            $http.get(`${fbcreds.databaseURL}/profiles/${data}.json`)
+            .then((response) => {
+                console.log("the response is",response);
+                resolve(response);
+            }).catch((error) => {
+                console.log(error, "error");
+            });
+        });
+    };
+
+
   const getUsers = () => {
     let users= [];
     return $q( (resolve, reject) => {
@@ -319,6 +335,6 @@ let removeBand= (uid, obj)=>{
     });
 };
 
-    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus, yourMessage, getMessages, removeStatus, removeMessage, editBand, removeBand};
+    return{addFriend, removeFriend, newProfile, editProfile, getProfile, getUsers, getProfiles, makeBand, getBands, getFriends, getBand, yourRequest, userRequest, sendRequest, yourStatus, getStatus, yourMessage, getMessages, removeStatus, removeMessage, editBand, removeBand, getYourProfile};
 
 });

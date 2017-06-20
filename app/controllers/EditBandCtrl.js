@@ -15,7 +15,7 @@ app.controller("EditBandCtrl", function($scope, AuthFactory, $window, $location,
         $scope.band= data;
     });
 
-    DataFactory.getProfile(user)
+    DataFactory.getYourProfile(user)
     .then((event)=>{
         $scope.user= event.data;
           for(obj in $scope.user.friends){

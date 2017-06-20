@@ -8,7 +8,7 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
     $scope.friend= false;
     let date= new Date();
     //console.log("Youser is", Youser);
-    DataFactory.getProfile( user)
+    DataFactory.getYourProfile( user)
     .then( stuff => {
         $scope.uid = stuff.data.uid;
         $scope.photo = stuff.data.photo;
@@ -48,7 +48,7 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
     let x= [];
     let obj;
 
-    DataFactory.getProfile(user)
+    DataFactory.getYourProfile(user)
     .then((event)=>{
         $scope.user= event.data;
           for(obj in $scope.user.friends){
@@ -92,7 +92,7 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
     // }); 
 
     let name;
-    DataFactory.getProfile(Youser)
+    DataFactory.getYourProfile(Youser)
     .then(data=>{
         console.log("data user profile", data.data);
         name= data.data.name;

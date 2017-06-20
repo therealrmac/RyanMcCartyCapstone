@@ -19,8 +19,7 @@ let user= AuthFactory.getUser();
     AuthFactory.logoutUser()
       .then(function (data) {
         //location is a service within angular
-        $window.location.url = ("#!/login");
-        $location.path("/login");
+        $location.url("/login");
         $scope.$apply();
       }, function (error) {
       });
@@ -85,9 +84,9 @@ let logMeIn = function(loginStuff){
         var user = result.user.uid;
         //Once logged in, go to another view
         $location.path("/users");
-        console.log(result, "result");
+        console.log("result user", result.user);
         DataFactory.getProfile(result.user);
-        $scope.$apply();
+          $scope.$apply();        
       }).catch(function (error) {
         // Handle the Errors.
         var errorCode = error.code;

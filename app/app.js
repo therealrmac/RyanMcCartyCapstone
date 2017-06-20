@@ -1,6 +1,6 @@
 "use strict";
 
-const app= angular.module("LetsJam", ["ngRoute"]);
+let app= angular.module("LetsJam", ["ngRoute"]);
 
 let isAuth= (AuthFactory) => {new Promise ( (resolve,reject) =>{
     AuthFactory.isAuthenticated()

@@ -2,6 +2,7 @@
 app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams){
 
     let Youser= AuthFactory.getUser();
+    console.log("current user is", Youser);
     let userId = $routeParams.userId;
     let date= new Date();
 
@@ -35,8 +36,9 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
     $scope.yourName = $routeParams.yourName;
 
 //GET CURRENT USERS PROFILE 
-    DataFactory.getProfile( Youser)
+    DataFactory.getYourProfile( Youser)
     .then( stuff => {
+        console.log("what is stuff", stuff.data);
         $scope.uid = stuff.data.uid;
         $scope.photo = stuff.data.photo;
         $scope.name= stuff.data.name;
@@ -59,7 +61,7 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
     let x= [];
     let obj;
 
-    DataFactory.getProfile(Youser)
+    DataFactory.getYourProfile(Youser)
     .then((event)=>{
         $scope.user= event.data;
           for(obj in $scope.user.friends){
@@ -75,7 +77,7 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
 
 //NEED A NAME TO GO ALONG WITH THE MESSAGE YOU WRIGHT
 let name;
-DataFactory.getProfile(Youser)
+DataFactory.getYourProfile(Youser)
 .then(data=>{
     name= data.data.name;
 });
