@@ -31,6 +31,7 @@ app.factory("AuthFactory", function(){
   };
 
     let logoutUser = function(){
+        console.log("yout logged out", currentUser);
         return firebase.auth().signOut();
     };
 
