@@ -38,6 +38,7 @@ let user= AuthFactory.getUser();
         console.log("user data is", userData);
         userInfo.uid= userData.uid;
         userInfo.email= userData.email;
+        $location.path("/users");
         DataFactory.newProfile(userInfo)
         .then((event)=>{
           logMeIn($scope.account);
@@ -54,8 +55,11 @@ let logMeIn = function(loginStuff){
       $scope.register = {};
       $location.url("/users");
       console.log(didLogin, "didLogin");
-      DataFactory.getProfile(didLogin);
-      $scope.$apply();
+      DataFactory.getProfile(didLogin)
+      .then(data=>{
+        $scope.$apply();
+      });
+      
     });
 };
   $scope.login = () => {

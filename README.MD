@@ -1,6 +1,6 @@
 # CAPSTONE MVP LITE ACHIEVED
 
-** Instructions **
+**Instructions**
 1. Sign in through google, or create an account with a valid email and password
 2. Explore the apps users and view their profiles
 3. Add them as friends
