@@ -36,7 +36,7 @@ app.config($routeProvider=>{
         resolve: {isAuth}
     })
     .when("/users/:userName/:userId/profile",{
-        templateUrl: "partials/UserProfile.html",
+        templateUrl: "partials/userProfile.html",
         controller: "UserProfileCtrl",
         resolve: {isAuth}
     })

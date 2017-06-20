@@ -1,12 +1,23 @@
 "use strict";
 
-app.controller('NavCtrl', function ($scope, AuthFactory, $window, SearchTermData, DataFactory) {
+app.controller('NavCtrl', function ($scope, AuthFactory, $window, SearchTermData, DataFactory, $location) {
   let you= AuthFactory.getUser();
   console.log("current user is", you);
 
 
   $scope.isLoggedIn = false;
   $scope.searchText = SearchTermData;
+  $scope.logout = () => {
+    AuthFactory.logoutUser()
+      .then(function (data) {
+        //location is a service within angular
+        $location.path("/login");
+        $scope.$apply();
+      }, function (error) {
+      });
+  };
+
+
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {

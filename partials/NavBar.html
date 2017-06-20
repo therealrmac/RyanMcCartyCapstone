@@ -22,7 +22,7 @@
         <li><a ng-show="isLoggedIn" ng-href="#!/profile/">Profile</a></li>
         <li><a ng-href="#!/register" ng-show="!isLoggedIn">Register</a></li>
         <li><a ng-href="#!/login" ng-show="!isLoggedIn">Login</a></li>
-        <li><a ng-show="isLoggedIn" ng-href="#!/login">Logout</a></li>
+        <li><a ng-show="isLoggedIn" ng-click="logout()" ng-href="#!/login">Logout</a></li>
       </ul>
     </div>
   </div>

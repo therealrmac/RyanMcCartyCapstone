@@ -14,21 +14,21 @@ let user= AuthFactory.getUser();
     password: ""
   };
 //change below with $window.location also, remove scope from logout
-//logout has no scope applied since it is only called internally
-  let logout = () => {
+//$logout has no scope applied since it is only called internally
+let logout = () => {
     AuthFactory.logoutUser()
       .then(function (data) {
         //location is a service within angular
-        $location.url("/login");
+        $location.path("/login");
         $scope.$apply();
       }, function (error) {
       });
   };
 
   //when first loaded, make sure no one is logged in
-  if (AuthFactory.isAuthenticated()) {
-    logout();
-  }
+  // if (AuthFactory.isAuthenticated()) {
+  //   logout();
+  // }
 
 
   $scope.register = (registerUser, userInfo) => {
@@ -53,7 +53,7 @@ let logMeIn = function(loginStuff){
   .then(function(didLogin){
       $scope.login = {};
       $scope.register = {};
-      $location.url("/users");
+      $location.path("/users");
       console.log(didLogin, "didLogin");
       DataFactory.getProfile(didLogin)
       .then(data=>{
