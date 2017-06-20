@@ -7,7 +7,7 @@ app.controller("BandForm", function($scope, AuthFactory, $window, $location, Dat
     let date= new Date();
 
 
-    DataFactory.getProfile(user)
+    DataFactory.getYourProfile(user)
     .then((event)=>{
         $scope.user= event.data;
         console.log("scope user is", $scope.user);
