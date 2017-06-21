@@ -1,12 +1,13 @@
 "use strict";
-app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams){
+app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams, $uibModal, $uibModalStack, $firebaseArray){
 
     let user = $routeParams.userId;
+    console.log("user", user);
     let proName= $routeParams.userName;
     console.log("routeParams", proName);
     let Youser= AuthFactory.getUser();
-    $scope.friend= false;
     let date= new Date();
+    $scope.friend= false;
     //console.log("Youser is", Youser);
     DataFactory.getYourProfile( user)
     .then( stuff => {
@@ -19,13 +20,73 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
         $scope.city= stuff.data.city;
         $scope.state= stuff.data.state;
     });
+
+$scope.open = function (size, parentSelector) {
+    var parentElem = parentSelector ? 
+      angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+    $scope.modalInstance = $uibModal.open({
+      animation: true,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'myModalContent.html',
+      size: size,
+      appendTo: parentElem,
+      resolve: {
+        items: function () {
+          return $scope.items;
+        }
+      }
+    });
+}
+
+
+
+$scope.openRemove = function (size, parentSelector) {
+    var parentElem = parentSelector ? 
+      angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+    $scope.modalInstance = $uibModal.open({
+      animation: true,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'removeFriend.html',
+      size: size,
+      appendTo: parentElem,
+      resolve: {
+        items: function () {
+          return $scope.items;
+        }
+      }
+    });
+}
+  
+
+    $scope.cancel = function () {
+      $uibModalStack.dismissAll('close');
+    };
+
+    //CHECK TO SEE IF YOU HAVE ADDED AS FRIENDS OR NOT
+    DataFactory.getYourProfile(Youser)
+    .then(data=>{
+        let friends= data.data.friends;
+        for(let f in friends){
+            if(friends[f] === user){
+                
+                $scope.friend= true;
+                $scope.$apply();
+            } else{
+                $scope.friend= false;
+            }
+        };
+    });
+
     $scope.addFriend = (id) => {
         console.log("what is id", id);
         DataFactory.addFriend(Youser, id)
         .then( response => {
             console.log("yeah add");
-            $scope.friend= false;
-            $scope.apply();
+            $scope.friend= true;
+            // $scope.$apply();
+            
         }).catch( error => {
             console.log(error, "error");
         });
@@ -34,8 +95,8 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
         DataFactory.removeFriend(Youser, id)
         .then( response => {
             console.log("yeah remove");
-            $scope.friend= true;
-            $scope.apply();
+            $scope.friend= false;
+            // $scope.$apply();
         }).catch( error => {
             console.log(error, "error");
         });
@@ -65,36 +126,11 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
         }
     }); 
 
-    // let y=[];
-    // let newObj
 
-    // DataFactory.getProfile(user)
-    // .then((event)=>{
-    //     $scope.user= event.data;
-    //     console.log("scope user", $scope.user);
-    //       for(newObj in $scope.user.friends){
-    //         console.log("newObj", newObj);
-    //         DataFactory.getBands(newObj)
-    //             .then((data)=>{
-    //                 console.log("what is data?", data);
-    //                 for(let chon in data.data){
-    //                     console.log("chon is",chon);
-    //                      if(data.data.uid !== Youser){
-    //                     y.push(data.data);
-    //                 }
-                   
-    //             }
-                
-    //            // console.log("x is", x);
-    //             //$scope.friends= x;
-    //         });
-    //     }
-    // }); 
 
     let name;
     DataFactory.getYourProfile(Youser)
     .then(data=>{
-        console.log("data user profile", data.data);
         name= data.data.name;
     });
 
@@ -135,6 +171,11 @@ $scope.addMessage= (text) =>{
             $scope.messages= event;
             $location.url(`/users/${proName}/${user}/profile`);
     });
+
+$firebaseArray(firebase.database().ref(profiles/${route})).$loaded().then(()=>{
+    
+})
+
      
 });
 

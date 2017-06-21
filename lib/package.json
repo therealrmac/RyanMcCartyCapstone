@@ -11,11 +11,12 @@
   "dependencies": {
     "angular": "^1.6.4",
     "angular-route": "^1.6.4",
+    "angular-ui-bootstrap": "^2.5.0",
+    "angularfire": "^2.3.0",
     "bootstrap": "^3.3.7",
     "firebase": "^4.1.1",
     "jquery": "^3.2.1",
-    "matchdep": "^1.0.1",
-    "angularfire": "^2.3.0"
+    "matchdep": "^1.0.1"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
