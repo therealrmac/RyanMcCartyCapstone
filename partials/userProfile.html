@@ -1,14 +1,30 @@
 <div class="row">
+
+<script type="text/ng-template" id="myModalContent.html">
+<h3 class="modal-title" id="modal-title">You added {{name}} as a friend</h3>
+<div class="modal-footer">
+<span>Click out of the window to close</span>
+</div>   
+</script>
+
+<script type="text/ng-template" id="removeFriend.html">
+<h3 class="modal-title" id="modal-title">You removed {{name}} as a friend</h3>
+<div class="modal-footer">
+<span>Click out of the window to close</span>
+</div>   
+</script>
     <div class="col-md-4 col-md-offset-4">
     </div>
     <div class="col-md-1 text-right">
-        <a ng-click="addFriend(uid)"><span  class="biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new board">Add Friend</span></a>
+        <a ng-click="addFriend(uid); open()"><span ng-show="!friend"  class="btn btn-info biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new board">Add Friend</span></a>
+
     </div>
 </div>
- <div class="col-md-4 friend">
+
+ <div class="col-md-4 text-left">
                 <div>
-                    <a ng-click="removeFriend(uid)">
-                        <span class="glyphicon glyphicon-minus">Remove Friend</span>
+                    <a  ng-click="removeFriend(uid); openRemove()">
+                        <span ng-show="friend" class="btn btn-info glyphicon glyphicon-minus">Remove Friend</span>
                     </a>
                 </div>
             </div>
@@ -24,9 +40,9 @@
                     </div>
                 
                 </div>
-                 <span >Info: {{gigs}}</span><br>
-                 <span>Instrument: {{instrument}}</span><br>
-                 <span>Style: {{style}}</span>
+                <span ><b>Info:</b> {{gigs}}</span><br>
+                 <span><b>Instrument:</b> {{instrument}}</span><br>
+                 <span><b>Style:</b> {{style}}</span>
                   <br>
                 <ul class="list-group form-control bg-faded msg-update-boxes">
                 <b>Status Updates:</b><!-- show posted status updates -->

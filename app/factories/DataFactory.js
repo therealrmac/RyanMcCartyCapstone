@@ -118,7 +118,7 @@ const getFriends= (userId)=>{
     };
 
     const getYourProfile = (data) => {
-        console.log("data on getProfile", data);
+        //console.log("data on getProfile", data);
         return $q((resolve, reject) => {
             $http.get(`${fbcreds.databaseURL}/profiles/${data}.json`)
             .then((response) => {
@@ -245,7 +245,7 @@ let yourMessage=(yourId, text)=>{
 
 //get all status's
 let getStatus=(yourId)=>{
-    console.log("yourId", yourId);
+    //console.log("yourId", yourId);
     let x=[];
     return $q((resolve,reject)=>{
         $http.get(`${fbcreds.databaseURL}/profiles/${yourId}/status.json`)
@@ -264,7 +264,7 @@ let getStatus=(yourId)=>{
 };
 
 let getMessages=(yourId)=>{
-    console.log("yourId", yourId);
+    //console.log("yourId", yourId);
     let x=[];
     return $q((resolve,reject)=>{
         $http.get(`${fbcreds.databaseURL}/profiles/${yourId}/message.json`)

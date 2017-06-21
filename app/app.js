@@ -1,6 +1,7 @@
 "use strict";
 
-let app= angular.module("LetsJam", ["ngRoute"]);
+let app= angular.module("LetsJam", ["ngRoute", "ui.bootstrap","firebase"]);
+// angular.module('myModule', ['tmjModal']);
 
 let isAuth= (AuthFactory) => {new Promise ( (resolve,reject) =>{
     AuthFactory.isAuthenticated()
@@ -15,6 +16,8 @@ let isAuth= (AuthFactory) => {new Promise ( (resolve,reject) =>{
         });
     });
 };
+
+
 
 app.config($routeProvider=>{
     $routeProvider

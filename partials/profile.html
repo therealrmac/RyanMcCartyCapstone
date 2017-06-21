@@ -5,11 +5,11 @@
     </div>
 
     <div class="col-md-1 text-right">
-        <a ng-href="#!/profile/edit"><span class="biggerPlease addPin glyphicon glyphicon-pencil"></span></a>
+        <a ng-href="#!/profile/edit"><span class="btn btn-info biggerPlease addPin glyphicon glyphicon-pencil"> Edit Profile</span></a>
     </div>
 
     <div class="col-md-1 text-right">
-        <a ng-href="#!/profile/newBand"><span class="biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new band">New Band</span></a>
+        <a ng-href="#!/profile/newBand"><span class="btn btn-info biggerPlease addPin glyphicon glyphicon-plus col-md-offset-4" alt="add new band"> New Band</span></a>
     </div>
 </div>
 <div class="offset-lg-4"></div><div class="col-lg-6">
@@ -22,9 +22,9 @@
                     </div>
                 
                 </div>
-                 <span >Info: {{gigs}}</span><br>
-                 <span>Instrument: {{instrument}}</span><br>
-                 <span>Style: {{style}}</span>
+                 <span ><b>Info:</b> {{gigs}}</span><br>
+                 <span><b>Instrument:</b> {{instrument}}</span><br>
+                 <span><b>Style:</b> {{style}}</span>
                      <section><!-- write status updates-->
                 <form class="input-group " ng-submit="updateStatus(update)">
                     <input type="text" class="statusInput   form-control" placeholder="Update Your Status" ng-model="update">
