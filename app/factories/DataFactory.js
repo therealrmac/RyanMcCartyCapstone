@@ -269,11 +269,6 @@ let getMessages=(yourId)=>{
     return $q((resolve,reject)=>{
         $http.get(`${fbcreds.databaseURL}/profiles/${yourId}/message.json`)
       .then( (userObj) => {
-        let userColl = userObj.data;
-        Object.keys(userColl).forEach((key)=>{
-          userColl[key].id= key;
-          x.push(userColl[key]);
-        });
         resolve(x);
         })
         .catch((error)=>{

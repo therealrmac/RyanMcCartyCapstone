@@ -36,18 +36,46 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
     $scope.yourName = $routeParams.yourName;
 
 //GET CURRENT USERS PROFILE 
-    DataFactory.getYourProfile( Youser)
-    .then( stuff => {
-        console.log("what is stuff", stuff.data);
-        $scope.uid = stuff.data.uid;
-        $scope.photo = stuff.data.photo;
-        $scope.name= stuff.data.name;
-        $scope.gigs= stuff.data.gigs;
-        $scope.style= stuff.data.style;
-        $scope.instrument= stuff.data.instrument;
-        $scope.city= stuff.data.city;
-        $scope.state= stuff.data.state;
-    });
+    // DataFactory.getYourProfile( Youser)
+    // .then( stuff => {
+    //     console.log("what is stuff", stuff.data);
+    //     $scope.uid = stuff.data.uid;
+    //     $scope.photo = stuff.data.photo;
+    //     $scope.name= stuff.data.name;
+    //     $scope.gigs= stuff.data.gigs;
+    //     $scope.style= stuff.data.style;
+    //     $scope.instrument= stuff.data.instrument;
+    //     $scope.city= stuff.data.city;
+    //     $scope.state= stuff.data.state;
+    // });
+
+firebase.database().ref("/profiles/" + Youser).on("value",function(stuff){
+        console.log("what is stuff", stuff.val());
+        $scope.uid = stuff.val().uid;
+        $scope.photo = stuff.val().photo;
+        $scope.name= stuff.val().name;
+        $scope.gigs= stuff.val().gigs;
+        $scope.style= stuff.val().style;
+        $scope.instrument= stuff.val().instrument;
+        $scope.city= stuff.val().city;
+        $scope.state= stuff.val().state;
+
+
+        $scope.updates= [];
+        let updateColl = stuff.val().status;
+        Object.keys(updateColl).forEach((key)=>{
+          updateColl[key].id= key;
+          $scope.updates.push(updateColl[key]);
+      });  
+
+        $scope.messages= [];
+        let userColl = stuff.val().message;
+        Object.keys(userColl).forEach((key)=>{
+          userColl[key].id= key;
+          $scope.messages.push(userColl[key]);
+      });
+    //$scope.$apply();
+});
     //GET CURRENT USERS BANDS
     DataFactory.getBands(Youser)
     .then((bands)=>{
@@ -94,23 +122,9 @@ $scope.updateStatus= (text) =>{
             timeStamp: date.toLocaleString(),
             ranNum: index
         };
-    DataFactory.yourStatus(Youser, $scope.status)
-    .then((event)=>{
-
-        DataFactory.getStatus(Youser)
-        .then((event)=>{
-            console.log("hi", event);
-            $scope.updates= event;
-            $location.url('/profile');
-        });
-    });
+    firebase.database().ref("profiles/" + Youser+"/status/"+ $scope.status.ranNum).set($scope.status);
+    $scope.update="";
 };
-    DataFactory.getStatus(Youser)
-    .then((event)=>{
-        console.log("hi", event);
-        $scope.updates= event;
-        $location.url('/profile');
-    });
 //END STATUS 
 
 
@@ -125,23 +139,9 @@ $scope.addMessage= (text) =>{
             ranNum: index,
             name: name
         };
-    DataFactory.yourMessage(Youser, $scope.messages)
-    .then((event)=>{
-
-        DataFactory.getMessages(Youser)
-        .then((event)=>{
-            console.log("hi", event);
-            $scope.messages= event;
-            $location.url('/profile');
-        });
-    });
+    firebase.database().ref("profiles/" + Youser+"/message/"+ $scope.messages.ranNum).set($scope.messages);
+    $scope.message= "";
 };
-    DataFactory.getMessages(Youser)
-    .then((event)=>{
-        console.log("hi", event);
-        $scope.messages= event;
-        $location.url('/profile');
-    });
 //END MESSAGES
 
 
@@ -149,16 +149,8 @@ $scope.addMessage= (text) =>{
 //REMOVE A SPECIFIC STATUS UPDATE FROM FIREBASE 
 $scope.removeStatus= (text)=>{
     console.log('remove text is', text);
-    DataFactory.removeStatus(Youser,text)
-    .then(data=>{
-        DataFactory.getStatus(Youser)
-            .then((event)=>{
-                console.log("hi", event);
-                $scope.updates= event;
-                $location.url('/profile');
-   
-        });
-    });
+    firebase.database().ref("profiles/" + Youser+"/status/"+ text.id).remove();
+
 };
 //END STATUS REMOVAL
 
@@ -166,16 +158,7 @@ $scope.removeStatus= (text)=>{
 
 $scope.removeMessage= (text)=>{
     console.log('remove text is', text);
-    DataFactory.removeMessage(Youser,text)
-    .then(data=>{
-        DataFactory.getMessages(Youser)
-            .then((event)=>{
-                console.log("hi", event);
-                $scope.messages= event;
-                $location.url('/profile');
-   
-        });
-    });
+    firebase.database().ref("profiles/" + Youser+"/message/"+ text.id).remove();
 };
 
 
