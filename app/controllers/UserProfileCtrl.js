@@ -9,18 +9,35 @@ app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $locati
     let date= new Date();
     $scope.friend= false;
     //console.log("Youser is", Youser);
-    DataFactory.getYourProfile( user)
-    .then( stuff => {
-        $scope.uid = stuff.data.uid;
-        $scope.photo = stuff.data.photo;
-        $scope.name= stuff.data.name;
-        $scope.gigs= stuff.data.gigs;
-        $scope.style= stuff.data.style;
-        $scope.instrument= stuff.data.instrument;
-        $scope.city= stuff.data.city;
-        $scope.state= stuff.data.state;
-    });
+firebase.database().ref("/profiles/" + user).on("value",function(stuff){
+        console.log("what is stuff", stuff.val());
+        $scope.uid = stuff.val().uid;
+        $scope.photo = stuff.val().photo;
+        $scope.name= stuff.val().name;
+        $scope.gigs= stuff.val().gigs;
+        $scope.style= stuff.val().style;
+        $scope.instrument= stuff.val().instrument;
+        $scope.city= stuff.val().city;
+        $scope.state= stuff.val().state;
 
+
+        $scope.updates= [];
+        let updateColl = stuff.val().status;
+        Object.keys(updateColl).forEach((key)=>{
+          updateColl[key].id= key;
+          $scope.updates.push(updateColl[key]);
+      });  
+
+        $scope.messages= [];
+        let userColl = stuff.val().message;
+        Object.keys(userColl).forEach((key)=>{
+          userColl[key].id= key;
+          $scope.messages.push(userColl[key]);
+         
+      });
+      console.log("scope messages is", $scope.messages);   
+    $scope.$apply();
+});
 $scope.open = function (size, parentSelector) {
     var parentElem = parentSelector ? 
       angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
@@ -134,14 +151,28 @@ $scope.openRemove = function (size, parentSelector) {
         name= data.data.name;
     });
 
-     DataFactory.getStatus(user)
-        .then((event)=>{
-            console.log("hi", event);
-            $scope.updates= event;
-            //$location.url('/profile');
-    });
 
+// $scope.addMessage= (text) =>{
+//     let index=  (new Date()).valueOf();
+//         $scope.messages={
+//             text: text,
+//             uid: Youser,
+//             date: (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear(),
+//             timeStamp: date.toLocaleString(),
+//             ranNum: index,
+//             name: name
+//         };
+//     DataFactory.yourMessage(user, $scope.messages)
+//     .then((event)=>{
 
+//         DataFactory.getMessages(user)
+//         .then((event)=>{
+//             console.log("hi", event);
+//             $scope.messages= event;
+//             $location.url(`/users/${proName}/${user}/profile`);
+//         });
+//     });
+// };
 $scope.addMessage= (text) =>{
     let index=  (new Date()).valueOf();
         $scope.messages={
@@ -152,29 +183,18 @@ $scope.addMessage= (text) =>{
             ranNum: index,
             name: name
         };
-    DataFactory.yourMessage(user, $scope.messages)
-    .then((event)=>{
+    firebase.database().ref("profiles/" + user+"/message/"+ $scope.messages.ranNum).set($scope.messages);
+    $scope.message= "";
+}; 
 
-        DataFactory.getMessages(user)
-        .then((event)=>{
-            console.log("hi", event);
-            $scope.messages= event;
-            $location.url(`/users/${proName}/${user}/profile`);
-        });
-    });
-};
-   
+    // DataFactory.getMessages(user)
+    //     .then((event)=>{
+    //         console.log("hi", event);
+    //         $scope.messages= event;
+    //         $location.url(`/users/${proName}/${user}/profile`);
+    // });
 
-    DataFactory.getMessages(user)
-        .then((event)=>{
-            console.log("hi", event);
-            $scope.messages= event;
-            $location.url(`/users/${proName}/${user}/profile`);
-    });
 
-$firebaseArray(firebase.database().ref(profiles/${route})).$loaded().then(()=>{
-    
-})
 
      
 });
