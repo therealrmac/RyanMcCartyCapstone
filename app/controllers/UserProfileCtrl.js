@@ -1,5 +1,5 @@
 "use strict";
-app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams, $uibModal, $uibModalStack, $firebaseArray){
+app.controller("UserProfileCtrl", function($scope, AuthFactory, $window, $location, DataFactory, $routeParams, $uibModal, $uibModalStack, $firebaseArray, $timeout){
 
     let user = $routeParams.userId;
     console.log("user", user);
@@ -20,22 +20,33 @@ firebase.database().ref("/profiles/" + user).on("value",function(stuff){
         $scope.city= stuff.val().city;
         $scope.state= stuff.val().state;
 
-
+        try{
         $scope.updates= [];
         let updateColl = stuff.val().status;
+        console.log("updateColl", updateColl);
         Object.keys(updateColl).forEach((key)=>{
           updateColl[key].id= key;
           $scope.updates.push(updateColl[key]);
       });  
+    }
+    catch(error){
+        console.log("your try for status has failed");
+    }
 
+    try{
         $scope.messages= [];
         let userColl = stuff.val().message;
+        console.log("userColl", userColl);
         Object.keys(userColl).forEach((key)=>{
           userColl[key].id= key;
           $scope.messages.push(userColl[key]);
          
       });
-      console.log("scope messages is", $scope.messages);   
+    }
+    catch(error){
+
+      console.log("your try for messages has failed");   
+    }
     $scope.$apply();
 });
 $scope.open = function (size, parentSelector) {
@@ -54,7 +65,7 @@ $scope.open = function (size, parentSelector) {
         }
       }
     });
-}
+};
 
 
 
@@ -74,7 +85,7 @@ $scope.openRemove = function (size, parentSelector) {
         }
       }
     });
-}
+};
   
 
     $scope.cancel = function () {
@@ -90,10 +101,11 @@ $scope.openRemove = function (size, parentSelector) {
                 
                 $scope.friend= true;
                 $scope.$apply();
+                $timeout();
             } else{
                 $scope.friend= false;
             }
-        };
+        }
     });
 
     $scope.addFriend = (id) => {
