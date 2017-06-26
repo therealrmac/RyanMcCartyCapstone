@@ -1,4 +1,4 @@
-<div class="container container--auth">
+<!-- <div class="container container--auth">
   <div class="col-xs-6">
     <h4>Login with Google</h4>
     <button ng-click="loginGoogle()" class="btn btn-info">Sign In</button>
@@ -6,7 +6,7 @@
   <div class="col-xs-6 text-right">
     <section class="auth-form">
       <h4>Login with Email</h4>
-      <div>
+      <div class="card">
         Email: <input type="email" placeholder="Email address" ng-model="auth.email" autofocus="true">
       </div>
       <div>
@@ -17,6 +17,29 @@
       </div>
     </section>
   </div>
-</div>
+</div> -->
 
+    <div class="container">
+      <div class="col-xs-6">
 
+    <h4>Login with Google</h4>
+    <button ng-click="loginGoogle()" class="btn btn-info">Sign In</button>
+    <br/>
+    <span>Singing through google for first time will require you to add more info about yourself on your profile after logging in.</span>
+  </div>
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" ng-model="auth.email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus="true">
+                <input type="password" id="inputPassword" ng-model="auth.password" class="form-control" placeholder="Password" required>
+
+                <button class="btn btn-lg btn-primary btn-block btn-info" type="submit" ng-click="loginUser(auth)" >Sign in</button>
+            </form><!-- /form -->
+            <a href="#" class="forgot-password">
+                Forgot the password?
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->

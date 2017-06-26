@@ -74,7 +74,7 @@ firebase.database().ref("/profiles/" + Youser).on("value",function(stuff){
           userColl[key].id= key;
           $scope.messages.push(userColl[key]);
       });
-    //$scope.$apply();
+    $scope.$apply();
 });
     //GET CURRENT USERS BANDS
     DataFactory.getBands(Youser)
