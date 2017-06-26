@@ -1,4 +1,4 @@
-<h1>Make a New Profile</h1>
+<!-- <h1>Make a New Profile</h1>
 <form class="form--demo col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
   <div class="form-group">
     <label>Full Name</label>
@@ -28,15 +28,7 @@
     <label>Previous Experience | Past Gigs</label>
     <input type="text" class="form-control" placeholder="Quick snippet of your music life" ng-model="profile.gigs"></input>
   </div>
-<!--   <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><label>Boards</label>
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li ng-repeat="item in boards" ng-click="addBoard(item.id, item.title)">{{item.title}}</li>
-      <li><input type="text" placeholder="new board" ng-model="temp" ng-keypress="newBoard($event)"></input></li>
-    </ul>
-    {{boardName}}
-  </div><br> -->
+
   <div class="col-xs-6 text-right">
     <section class="auth-form">
       <div>
@@ -50,3 +42,109 @@
     <button type="button" ng-click="register(auth,profile)" class="btn btn-default btn-primary">Register</button>
   </div>
 </form>
+ -->
+
+
+
+  <div class="container">
+      <div class="row main">
+        <div class="main-login main-center">
+        <h5>Sign up for free and connect with other musicians in your area.</h5>
+          <form class="" method="post" action="#">
+            
+            <div class="form-group">
+              <label for="name" class="cols-sm-2 control-label">Your Name</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <input type="text" ng-model="profile.displayName" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="cols-sm-2 control-label">Your Email</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" ng-model="auth.email" name="email" id="email"  placeholder="Enter your Email"/>
+                </div>
+              </div>
+            </div>
+
+           <div class="form-group">
+              <label for="password" class="cols-sm-2 control-label">Password</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" ng-model="auth.password" name="password" id="password"  placeholder="Enter your password"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="cols-sm-2 control-label">Style</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-headphones" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="username" id="username"  ng-model="profile.style" placeholder="Enter your play style"/>
+                </div>
+              </div>
+            </div>
+              <div class="form-group">
+              <label for="username" class="cols-sm-2 control-label">Past Experience</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="username" id="username" ng-model="profile.gigs" placeholder="Tell us about your previous music experiences"/>
+                </div>
+              </div>
+            </div>
+
+         <div class="form-group">
+              <label for="username" class="cols-sm-2 control-label">Instruments</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" ng-model="profile.instrument" name="username" id="username"  placeholder="Enter what instrument(s) you play"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="username" class="cols-sm-2 control-label">State</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" ng-model="profile.state" name="username" id="username"  placeholder="Enter your State"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="cols-sm-2 control-label">City</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" ng-model="profile.city" name="username" id="username"  placeholder="Enter your City"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="photo" class="cols-sm-2 control-label">Photo Url</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa"></i></span>
+                  <input type="photo" class="form-control" name="photo" id="password" ng-model="profile.photoURL" placeholder="Link a photo of you here"/>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group ">
+              <a href="#" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="register(auth,profile)">Register</a>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
