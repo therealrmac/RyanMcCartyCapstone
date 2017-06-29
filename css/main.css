@@ -82,6 +82,9 @@ a:hover {
   z-index: 0;
   opacity: 0.3; }
 
+.query {
+  margin-top: 15px; }
+
 #playground-container {
   height: 500px;
   overflow: hidden !important;
