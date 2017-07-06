@@ -3,6 +3,8 @@
 let app= angular.module("LetsJam", ["ngRoute", "ui.bootstrap","firebase"]);
 // angular.module('myModule', ['tmjModal']);
 
+
+//FUNCTION FOR DETERMINING IF A USER IS LOGGED IN OR NOT
 let isAuth= (AuthFactory) => {new Promise ( (resolve,reject) =>{
     AuthFactory.isAuthenticated()
     .then((userExists)=>{
@@ -16,9 +18,10 @@ let isAuth= (AuthFactory) => {new Promise ( (resolve,reject) =>{
         });
     });
 };
+//END 
 
 
-
+//CONFIGURATION FOR ALL MY ROUTES
 app.config($routeProvider=>{
     $routeProvider
     .when("/",{
@@ -32,10 +35,16 @@ app.config($routeProvider=>{
     .when("/login",{
         templateUrl: "partials/login.html",
         controller: "AuthCtrl"
+
     })
     .when("/users",{
         templateUrl: "partials/users.html",
         controller: "UsersCtrl",
+        resolve: {isAuth}
+    })
+    .when("/recusers",{
+        templateUrl: "partials/recusers.html",
+        controller: "RecUsersCtrl",
         resolve: {isAuth}
     })
     .when("/users/:userName/:userId/profile",{
@@ -76,8 +85,10 @@ app.config($routeProvider=>{
     .otherwise("/");
 
 });
+//END CONFIGURATION
 
 
+//GETTING FIREBASE RUNNING
 app.run(($location, fbcreds)=>{
    let cred = fbcreds;
    let authConfig = {

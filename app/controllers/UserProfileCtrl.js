@@ -185,6 +185,17 @@ $scope.openRemove = function (size, parentSelector) {
 //         });
 //     });
 // };
+
+
+//BEGIN GET PIC FOR MESSAGES
+let pic;
+DataFactory.getYourProfile(Youser)
+.then(data=>{
+    pic= data.data.photo;
+    console.log("pic", pic);
+});
+//END GETTING PIC
+
 $scope.addMessage= (text) =>{
     let index=  (new Date()).valueOf();
         $scope.messages={
@@ -193,7 +204,8 @@ $scope.addMessage= (text) =>{
             date: (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear(),
             timeStamp: date.toLocaleString(),
             ranNum: index,
-            name: name
+            name: name,
+            pic: pic
         };
     firebase.database().ref("profiles/" + user+"/message/"+ $scope.messages.ranNum).set($scope.messages);
     $scope.message= "";

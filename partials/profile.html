@@ -33,10 +33,11 @@
                     </span>
                     </form>
                     </section>
-                <ul class="list-group form-control bg-faded msg-update-boxes">
+                <ul class="list-group form-control bg-faded msg-update-boxes chatScroll">
                 <b>Status Updates:</b><!-- show posted status updates -->
 
                 <li ng-repeat="update in updates | orderBy:'timeStamp':true">
+                <img src="{{photo}}" class="friendPhoto">
                     <b>{{update.timeStamp}}:</b>
                     <a href="" ng-click="removeStatus(update)">(remove)</a>
                     <p>{{update.text}}</p>
@@ -45,16 +46,17 @@
         <!-- End Status Updates --> 
         <br />
          <form class="input-group" ng-submit="addMessage(message)"> <!-- add message box -->
-            <input type="text" class="form-control" placeholder="Add a Message" ng-model="message">
+            <input type="text" class="form-control " placeholder="Add a Message" ng-model="message">
             <span class="input-group-btn">
             <button class="btn btn-secondary bg-faded" type="submit">Send Message</button>
                 </span>
             </form>
 
 
-            <ul class="list-group form-control bg-faded msg-update-boxes">
+            <ul class="list-group form-control bg-faded msg-update-boxes chatScroll">
                 <b>Messages:</b> <br /> <!-- show posted messages -->
                 <li ng-repeat="message in messages | orderBy:'timeStamp':true">
+                <img src="{{message.pic}}" class="friendPhoto">
                     <b>{{message.timeStamp}}: {{message.name}} wrote:</b>
                     <a ng-click="removeMessage(message)">(remove)</a>
                     <p>{{message.text}}</p>
@@ -77,8 +79,9 @@
         </a>
        
     </div>
-<div class="col-sm-4 offset-lg-5">
     <h2> Friends</h2>
+<div class="col-sm-4 offset-lg-5 scrolling">
+    
     <div ng-repeat="friend in friends">
         <a ng-href="#!/users/{{friend.name}}/{{friend.uid}}/profile"><img src="{{friend.photo}}" class="friendPhoto"><span>{{friend.name}}</span></a>
 

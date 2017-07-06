@@ -117,6 +117,7 @@ const getFriends= (userId)=>{
         });
     };
 
+
     const getYourProfile = (data) => {
         //console.log("data on getProfile", data);
         return $q((resolve, reject) => {
@@ -159,6 +160,7 @@ const getProfiles = () => {
         });
     });
 };
+
 
 const getBand= (userId,bandName) =>{
     console.log("userId is", userId);
