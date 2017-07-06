@@ -73,6 +73,7 @@ firebase.database().ref("/profiles/" + Youser).on("value",function(stuff){
         Object.keys(userColl).forEach((key)=>{
           userColl[key].id= key;
           $scope.messages.push(userColl[key]);
+
       });
     $scope.$apply();
 });
@@ -111,6 +112,14 @@ DataFactory.getYourProfile(Youser)
 });
 //END GET NAME 
 
+//BEGIN GETTING PHOTO FOR MESSAGES
+let pic;
+DataFactory.getYourProfile(Youser)
+.then(data=>{
+    pic= data.data.photo;
+    console.log("pic", pic);
+});
+
 
 //MAKE A NEW STATUS AND HAVE IT UPDATE IN REAL TIME
 $scope.updateStatus= (text) =>{
@@ -137,7 +146,8 @@ $scope.addMessage= (text) =>{
             date: (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear(),
             timeStamp: date.toLocaleString(),
             ranNum: index,
-            name: name
+            name: name,
+            pic: pic
         };
     firebase.database().ref("profiles/" + Youser+"/message/"+ $scope.messages.ranNum).set($scope.messages);
     $scope.message= "";

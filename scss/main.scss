@@ -38,7 +38,9 @@ a:hover {
 
 .form-control:focus {
   border-color: rgba(0, 0, 0, 0.5); }
-
+.givemespace{
+  margin-top: 25px;
+}
 
 .search-bar-spacing {
   margin-bottom: 20px;
@@ -66,7 +68,10 @@ a:hover {
 	margin-top: 10px;
 	margin-bottom: 20px;
 }
-
+.scrolling{
+  height: 300px;
+  overflow-y: auto;
+}
 .friendPhoto{
 	border-radius: 50%;
 	max-width: 40px;
@@ -146,8 +151,13 @@ input::-webkit-input-placeholder {
 
 }
 .form-control {
-    height: auto!important;
-padding: 8px 12px !important;
+    height: auto ;
+    padding: 8px 12px !important;
+    
+}
+.chatScroll{
+  height: 300px;
+  overflow-y: auto;
 }
 .input-group {
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
