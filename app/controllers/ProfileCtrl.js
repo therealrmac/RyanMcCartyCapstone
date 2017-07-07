@@ -6,27 +6,6 @@ app.controller("ProfileCtrl", function($scope, AuthFactory, $window, $location, 
     let userId = $routeParams.userId;
     let date= new Date();
 
-    // Connection Request
-    $scope.AreWeConnected = false;
-    $scope.connect_button_clicked = false;
-    $scope.respondConnReq = false;
-    $scope.connectReqText = 'Request Connection';
-    $scope.respondConnReqText = 'Respond to Request';
-
-
-    // Relationship Request
-    $scope.InRelationship = false;
-    $scope.respondRelReq = false;
-    $scope.relationship_button_clicked = false;
-    $scope.hideRelationshipButton = false;
-    $scope.thisUserInRelationship = false;
-    $scope.loggedInUserInRelationship = false;
-    $scope.relationshipReqText = 'Request Relationship';
-    $scope.respondRelReqText = 'Confirm Relationship';
-
-    $scope.myProfile = false;
-
-
 
 
     if(Youser === userId){
@@ -96,7 +75,7 @@ firebase.database().ref("/profiles/" + Youser).on("value",function(stuff){
           for(obj in $scope.user.friends){
         DataFactory.getFriends(obj)
         .then((data)=>{
-            x.push(data.data);
+        x.push(data.data);
             $scope.friends= x;
         });
         }
